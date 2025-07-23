@@ -8,7 +8,87 @@
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
   <body>
-    <h1 class="">Jira App</h1>
+    <h1 class="text-center">Jira App</h1>
+    <!-- Full Container -->
+    <div class="container">
+      <ul class="drag-list">
+        <!-- ToDo -->
+        <li class="drag-column todo-column">
+          <span>
+            <h1 class="">ToDo</h1>
+          </span>
+
+          <div id="todo-content">
+            <ul id="todo-list" class="drag-item-list">
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+            </ul>
+          </div>
+          <div class="add-container">
+            <div class="add-item"></div>
+          </div>
+
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-span">+</span>
+            </div>
+            <div class="add-btn save">Save</div>
+          </div>
+        </li>
+        <!-- In Progress -->
+        <li class="drag-column progress-column">
+          <span>
+            <h1 class="">ToDo</h1>
+          </span>
+
+          <div id="progress-content">
+            <ul id="progress-list" class="drag-item-list">
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+            </ul>
+          </div>
+          <div class="add-container">
+            <div class="add-item"></div>
+          </div>
+
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-span">+</span>
+            </div>
+            <div class="add-btn save">Save</div>
+          </div>
+        </li>
+        <!-- Finished -->
+        <li class="drag-column finished-column">
+          <span>
+            <h1 class="">ToDo</h1>
+          </span>
+
+          <div id="finished-content">
+            <ul id="finished-list" class="drag-item-list">
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+              <li class="drag-item">Test</li>
+            </ul>
+          </div>
+          <div class="add-container">
+            <div class="add-item"></div>
+          </div>
+
+          <div class="add-btn-group">
+            <div class="add-btn">
+              <span class="plus-span">+</span>
+            </div>
+            <div class="add-btn save">Save</div>
+          </div>
+        </li>
+      </ul>
+    </div>
     <script src="script.js"></script>
   </body>
 </html>
