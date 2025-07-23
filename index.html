@@ -7,88 +7,141 @@
     <link rel="stylesheet" href="./style.css" />
     <script src="https://cdn.jsdelivr.net/npm/@tailwindcss/browser@4"></script>
   </head>
-  <body>
-    <h1 class="text-center">Jira App</h1>
+  <body
+    class="min-h-screen bg-gradient-to-t from-blue-800 via-blue-950 to-slate-950 text-white m-10"
+  >
+    <h1 class="text-center text-3xl font-bold m-auto mb-8 text-white">
+      Jira App
+    </h1>
     <!-- Full Container -->
-    <div class="container">
-      <ul class="drag-list">
+    <div class="container m-auto text-slate-800">
+      <ul class="drag-list flex flex-col md:flex-row m-10 gap-4 md:gap-6">
         <!-- ToDo -->
-        <li class="drag-column todo-column">
-          <span>
-            <h1 class="">ToDo</h1>
-          </span>
+        <li
+          class="drag-column todo-column flex-1 p-6 bg-red-100 rounded-lg shadow-lg"
+        >
+          <div>
+            <h1 class="text-xl text-center font-semibold text-red-700 mb-4">
+              Things To Do
+            </h1>
+          </div>
 
           <div id="todo-content">
             <ul id="todo-list" class="drag-item-list">
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
+              <li
+                class="drag-item cursor-pointer bg-white rounded-md p-4 my-3 shadow-sm hover:shadow-md transition-shadow text-red-900"
+              >
+                Sample todo task
+              </li>
             </ul>
           </div>
-          <div class="add-container">
-            <div class="add-item"></div>
+          <div class="add-container p-4 my-3 bg-white rounded-sm">
+            <textarea
+              class="add-item w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
+              placeholder="Type here..."
+            ></textarea>
           </div>
 
-          <div class="add-btn-group">
+          <div class="add-btn-group flex justify-between items-center mt-4">
             <div class="add-btn">
-              <span class="plus-span">+</span>
+              <div
+                class="plus-span cursor-pointer bg-red-100 hover:bg-red-200 w-8 h-8 rounded-full flex items-center justify-center text-red-600 font-semibold transition-colors"
+              >
+                +
+              </div>
             </div>
-            <div class="add-btn save">Save</div>
+            <div
+              class="add-btn save cursor-pointer bg-white hover:bg-rose-200 px-4 py-2 rounded-md text-rose-600 text-sm transition-colors"
+            >
+              Save
+            </div>
           </div>
         </li>
+
         <!-- In Progress -->
-        <li class="drag-column progress-column">
-          <span>
-            <h1 class="">ToDo</h1>
-          </span>
+        <li
+          class="drag-column progress-column flex-1 p-6 bg-amber-100 rounded-lg shadow-lg"
+        >
+          <div>
+            <h1 class="text-xl text-center font-semibold text-amber-700 mb-4">
+              In Progress
+            </h1>
+          </div>
 
           <div id="progress-content">
             <ul id="progress-list" class="drag-item-list">
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
+              <li
+                class="drag-item cursor-pointer bg-white rounded-md p-4 my-3 shadow-sm hover:shadow-md transition-shadow text-amber-900"
+              >
+                Working on this feature
+              </li>
             </ul>
           </div>
-          <div class="add-container">
-            <div class="add-item"></div>
+          <div class="add-container p-4 my-3 bg-white rounded-sm">
+            <textarea
+              class="add-item w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
+              placeholder="Type here..."
+            ></textarea>
           </div>
 
-          <div class="add-btn-group">
+          <div class="add-btn-group flex justify-between items-center mt-4">
             <div class="add-btn">
-              <span class="plus-span">+</span>
+              <div
+                class="plus-span cursor-pointer bg-amber-100 hover:bg-amber-200 w-8 h-8 rounded-full flex items-center justify-center text-amber-600 font-semibold transition-colors"
+              >
+                +
+              </div>
             </div>
-            <div class="add-btn save">Save</div>
+            <div
+              class="add-btn save cursor-pointer bg-white hover:bg-amber-200 px-4 py-2 rounded-md text-amber-600 text-sm transition-colors"
+            >
+              Save
+            </div>
           </div>
         </li>
+
         <!-- Finished -->
-        <li class="drag-column finished-column">
-          <span>
-            <h1 class="">ToDo</h1>
-          </span>
+        <li
+          class="drag-column finished-column flex-1 p-6 bg-emerald-100 rounded-lg shadow-lg"
+        >
+          <div>
+            <h1 class="text-xl text-center font-semibold text-emerald-700 mb-4">
+              Finished
+            </h1>
+          </div>
 
           <div id="finished-content">
             <ul id="finished-list" class="drag-item-list">
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
-              <li class="drag-item">Test</li>
+              <li
+                class="drag-item cursor-pointer bg-white rounded-md p-4 my-3 shadow-sm hover:shadow-md transition-shadow text-green-800/60 line-through"
+              >
+                Completed successfully
+              </li>
             </ul>
           </div>
-          <div class="add-container">
-            <div class="add-item"></div>
+          <div class="add-container p-4 my-3 bg-white rounded-sm">
+            <textarea
+              class="add-item w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
+              placeholder="Type here..."
+            ></textarea>
           </div>
 
-          <div class="add-btn-group">
+          <div class="add-btn-group flex justify-between items-center mt-4">
             <div class="add-btn">
-              <span class="plus-span">+</span>
+              <div
+                class="plus-span cursor-pointer bg-emerald-100 hover:bg-emerald-200 w-8 h-8 rounded-full flex items-center justify-center text-emerald-600 font-semibold transition-colors"
+              >
+                +
+              </div>
             </div>
-            <div class="add-btn save">Save</div>
+            <div
+              class="add-btn save cursor-pointer bg-white hover:bg-emerald-200 px-4 py-2 rounded-md text-emerald-600 text-sm transition-colors"
+            >
+              Save
+            </div>
           </div>
         </li>
       </ul>
     </div>
-    <script src="script.js"></script>
   </body>
 </html>
