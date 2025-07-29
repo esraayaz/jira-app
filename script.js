@@ -1,3 +1,5 @@
+const listColumns = document.querySelectorAll(".drag-item-list");
+
 const todoList = document.getElementById("todo-list");
 const progressList = document.getElementById("progress-list");
 const finishedList = document.getElementById("finished-list");
@@ -6,6 +8,9 @@ let todoListArray = [];
 let progressListArray = [];
 let finishedListArray = [];
 let listArrays = [];
+
+let draggedItem;
+let currentColumn;
 
 let updatedOnLoad = false;
 
@@ -47,12 +52,56 @@ function createItem(columnItem, column, item, index) {
     "shadow-2xl",
     "duration-300",
     "ease-in-out",
-    "hover:shadow-xl",
+    "hover:-translate-y-1",
     "transition-all",
     "text-slate-800"
   );
+  listItem.classList.add("drag-item");
   listItem.textContent = item;
+  listItem.draggable = true;
+  listItem.setAttribute("ondragstart", "drag(event)");
   columnItem.appendChild(listItem);
+}
+
+function allowDrop(e) {
+  e.preventDefault();
+}
+
+function dragEnter(column) {
+  currentColumn = column;
+}
+
+function drop(e) {
+  e.preventDefault();
+  const parent = listColumns[currentColumn];
+
+  parent.appendChild(draggedItem);
+
+  rebuildArrays();
+}
+
+function rebuildArrays() {
+  todoListArray = [];
+  progressListArray = [];
+  finishedListArray = [];
+
+  todoList.querySelectorAll(".drag-item").forEach((item) => {
+    todoListArray.push(item.textContent);
+  });
+
+  progressList.querySelectorAll(".drag-item").forEach((item) => {
+    progressListArray.push(item.textContent);
+  });
+
+  finishedList.querySelectorAll(".drag-item").forEach((item) => {
+    finishedListArray.push(item.textContent);
+  });
+
+  updateSavedColumns();
+}
+
+function drag(e) {
+  draggedItem = e.target;
 }
 
 function updateDOM() {
@@ -66,8 +115,14 @@ function updateDOM() {
   });
 
   progressList.textContent = "";
+  progressListArray.forEach((progressItem, index) => {
+    createItem(progressList, 1, progressItem, index);
+  });
 
   finishedList.textContent = "";
+  finishedListArray.forEach((finishedItem, index) => {
+    createItem(finishedList, 2, finishedItem, index);
+  });
 
   updatedOnLoad = true;
 

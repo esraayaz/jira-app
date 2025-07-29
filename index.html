@@ -36,12 +36,18 @@
             <h1
               class="text-xl md:text-2xl lg:text-3xl text-center font-semibold text-white mb-4"
             >
-              Things To Do
+              To Do
             </h1>
           </div>
 
           <div id="todo-content">
-            <ul id="todo-list">
+            <ul
+              class="drag-item-list min-h-5"
+              id="todo-list"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(0)"
+              ondrop="drop(event)"
+            >
               <li>
                 <!--List comes here-->
               </li>
@@ -83,7 +89,13 @@
           </div>
 
           <div>
-            <ul id="progress-list">
+            <ul
+              class="drag-item-list min-h-5"
+              id="progress-list"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(1)"
+              ondrop="drop(event)"
+            >
               <li
                 class="drag-item cursor-pointer bg-white rounded-md p-4 my-3 shadow-sm hover:shadow-md transition-shadow text-slate-800"
               >
@@ -114,7 +126,7 @@
           </div>
         </li>
 
-        <!-- Finished -->
+        <!-- Finished / Completed / Done -->
         <li
           class="flex-1 p-6 bg-white/20 rounded-lg shadow-lg backdrop-blur-2xl"
         >
@@ -122,12 +134,18 @@
             <h1
               class="text-xl md:text-2xl lg:text-3xl text-center font-semibold text-white mb-4"
             >
-              Finished
+              Completed
             </h1>
           </div>
 
           <div>
-            <ul id="finished-list">
+            <ul
+              class="drag-item-list min-h-5"
+              id="finished-list"
+              ondragover="allowDrop(event)"
+              ondragenter="dragEnter(2)"
+              ondrop="drop(event)"
+            >
               <li
                 class="drag-item cursor-pointer bg-white rounded-md p-4 my-3 shadow-sm hover:shadow-md transition-shadow text-slate-800/50 line-through"
               >
