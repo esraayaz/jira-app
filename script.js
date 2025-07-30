@@ -17,6 +17,7 @@ let draggedItem;
 let currentColumn;
 let updatedOnLoad = false;
 
+// Retrieve columns stored in LocalStorage
 function getSavedColumns() {
   const savedTodo = localStorage.getItem("todoItems");
   const savedProgress = localStorage.getItem("progressItems");
@@ -27,12 +28,14 @@ function getSavedColumns() {
     progressListArray = JSON.parse(savedProgress);
     finishedListArray = JSON.parse(savedFinished);
   } else {
+    // Default values
     todoListArray = ["React integration", "Angular integration"];
     progressListArray = ["Counter application"];
     finishedListArray = ["Design your website"];
   }
 }
 
+// Save columns to localStorage
 function updateSavedColumns() {
   listArrays = [todoListArray, progressListArray, finishedListArray];
   const arrayNames = ["todo", "progress", "finished"];
@@ -44,6 +47,7 @@ function updateSavedColumns() {
   });
 }
 
+// Create new item
 function createItem(columnItem, column, item, index) {
   const listItem = document.createElement("li");
   listItem.classList.add(
@@ -64,14 +68,16 @@ function createItem(columnItem, column, item, index) {
     "text-slate-800"
   );
 
+  // Add lines to items in the Completed column
   if (column === 2) {
-    listItem.classList.add("line-through", "opacity-50");
+    listItem.classList.add("line-through", "text-slate-800/50");
   }
 
   listItem.textContent = item;
   listItem.draggable = true;
   listItem.setAttribute("ondragstart", "drag(event)");
 
+  // Double-click to edit
   listItem.addEventListener("dblclick", function () {
     editItem(listItem, column);
   });
@@ -79,6 +85,7 @@ function createItem(columnItem, column, item, index) {
   columnItem.appendChild(listItem);
 }
 
+// Edit item
 function editItem(item, column) {
   const originalText = item.textContent;
   const input = document.createElement("input");
@@ -95,10 +102,13 @@ function editItem(item, column) {
   function saveEdit() {
     const newText = input.value.trim();
     if (newText) {
+      // Update if there is text
       item.textContent = newText;
       rebuildArrays();
     } else {
-      item.textContent = originalText;
+      // If the text is empty, delete the item.
+      item.remove();
+      rebuildArrays();
     }
   }
 
@@ -107,11 +117,13 @@ function editItem(item, column) {
     if (e.key === "Enter") {
       input.blur();
     } else if (e.key === "Escape") {
+      // Escape ile iptal - eski metni geri yükle
       item.textContent = originalText;
     }
   });
 }
 
+// Show add-item's div
 function showItemDiv(column) {
   addButtons[column].classList.add("hidden");
   addItemContainers[column].classList.remove("hidden");
@@ -119,12 +131,12 @@ function showItemDiv(column) {
   addItems[column].focus();
 }
 
-// Add item div'ini gizle ve kaydet
+// Hide add-item's div and save
 function hideItemDiv(column) {
   const textValue = addItems[column].value.trim();
 
   if (textValue) {
-    // Yeni item'ı ilgili diziye ekle
+    // Add the new item to the relevant array
     if (column === 0) {
       todoListArray.push(textValue);
     } else if (column === 1) {
@@ -133,18 +145,18 @@ function hideItemDiv(column) {
       finishedListArray.push(textValue);
     }
 
-    // DOM'u güncelle
+    // Update DOM
     updateDOM();
   }
 
-  // Form'u temizle ve gizle
+  // Clear and hide form
   addItems[column].value = "";
   addItemContainers[column].classList.add("hidden");
   saveButtons[column].classList.add("hidden");
   addButtons[column].classList.remove("hidden");
 }
 
-// Drag & Drop fonksiyonları
+// Drag & Drop functions
 function allowDrop(e) {
   e.preventDefault();
 }
@@ -170,7 +182,7 @@ function drag(e) {
   draggedItem = e.target;
 }
 
-// Dizileri yeniden oluştur
+// Recreate the arrays
 function rebuildArrays() {
   todoListArray = [];
   progressListArray = [];
@@ -191,18 +203,18 @@ function rebuildArrays() {
   updateSavedColumns();
 }
 
-// DOM'u güncelle
+// Update DOM
 function updateDOM() {
   if (!updatedOnLoad) {
     getSavedColumns();
   }
 
-  // Listeleri temizle
+  // Clear lists
   todoList.innerHTML = "";
   progressList.innerHTML = "";
   finishedList.innerHTML = "";
 
-  // Yeni itemları oluştur
+  // Create new items
   todoListArray.forEach((todoItem, index) => {
     createItem(todoList, 0, todoItem, index);
   });
@@ -229,5 +241,5 @@ addItems.forEach((textarea, index) => {
   });
 });
 
-// Sayfa yüklendiğinde başlat
+// Start when the page loads
 updateDOM();
