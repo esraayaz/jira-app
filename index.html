@@ -53,23 +53,25 @@
               </li>
             </ul>
           </div>
-          <div class="p-4 my-3 bg-white/50 rounded-sm">
+          <div class="add-item p-4 my-3 bg-white/50 rounded-sm hidden">
             <textarea
-              class="add-item w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
+              class="text-area w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
               placeholder="Type here..."
+              contenteditable="true"
             ></textarea>
           </div>
 
           <div class="flex justify-between items-center mt-4">
-            <div>
-              <div
-                class="cursor-pointer bg-white/60 w-7 h-7 hover:bg-rose-100 rounded-sm flex items-center justify-center text-slate-600 font-semibold transition-colors"
-              >
-                +
-              </div>
-            </div>
             <div
-              class="save cursor-pointer bg-white hover:bg-rose-200 px-4 py-2 rounded-md text-black text-sm transition-colors"
+              class="add-btn cursor-pointer bg-white/60 w-7 h-7 hover:bg-rose-100 rounded-sm flex items-center justify-center text-slate-600 font-semibold transition-colors"
+              onClick="showItemDiv(0)"
+            >
+              +
+            </div>
+
+            <div
+              class="save cursor-pointer bg-white hover:bg-rose-200 px-4 py-2 rounded-md text-black text-sm transition-colors hidden"
+              onClick="hideItemDiv(0)"
             >
               Save
             </div>
@@ -103,23 +105,25 @@
               </li>
             </ul>
           </div>
-          <div class="p-4 my-3 bg-white/50 rounded-sm">
+          <div class="add-item p-4 my-3 bg-white/50 rounded-sm hidden">
             <textarea
-              class="add-item w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
+              class="text-area w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
               placeholder="Type here..."
+              contenteditable="true"
             ></textarea>
           </div>
 
           <div class="flex justify-between items-center mt-4">
-            <div>
-              <div
-                class="cursor-pointer bg-white/60 w-7 h-7 hover:bg-amber-100 rounded-sm flex items-center justify-center text-slate-600 font-semibold transition-colors"
-              >
-                +
-              </div>
-            </div>
             <div
-              class="save cursor-pointer bg-white hover:bg-amber-200 px-4 py-2 rounded-md text-black text-sm transition-colors"
+              class="add-btn cursor-pointer bg-white/60 w-7 h-7 hover:bg-amber-100 rounded-sm flex items-center justify-center text-slate-600 font-semibold transition-colors"
+              onClick="showItemDiv(1)"
+            >
+              +
+            </div>
+
+            <div
+              class="save cursor-pointer bg-white hover:bg-amber-200 px-4 py-2 rounded-md text-black text-sm transition-colors hidden"
+              onClick="hideItemDiv(1)"
             >
               Save
             </div>
@@ -153,23 +157,24 @@
               </li>
             </ul>
           </div>
-          <div class="p-4 my-3 bg-white/50 rounded-sm">
+          <div class="add-item p-4 my-3 bg-white/50 rounded-sm hidden">
             <textarea
-              class="w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
+              class="text-area w-full min-h-auto resize-none border-none focus:outline-none bg-transparent"
               placeholder="Type here..."
+              contenteditable="true"
             ></textarea>
           </div>
 
           <div class="flex justify-between items-center mt-4">
-            <div>
-              <div
-                class="plus-span cursor-pointer bg-white/60 w-7 h-7 hover:bg-emerald-100 rounded-sm flex items-center justify-center text-slate-600 font-semibold transition-colors"
-              >
-                +
-              </div>
+            <div
+              class="add-btn cursor-pointer bg-white/60 w-7 h-7 hover:bg-emerald-100 rounded-sm flex items-center justify-center text-slate-600 font-semibold transition-colors"
+              onClick="showItemDiv(3)"
+            >
+              +
             </div>
             <div
-              class="save cursor-pointer bg-white hover:bg-emerald-200 px-4 py-2 rounded-md text-black text-sm transition-colors"
+              class="save cursor-pointer bg-white hover:bg-emerald-200 px-4 py-2 rounded-md text-black text-sm transition-colors hidden"
+              onClick="hideItemDiv(2)"
             >
               Save
             </div>
