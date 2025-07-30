@@ -5,4 +5,4 @@
 🤍 You can move an item you've added to the 'To-Do' list to the 'In Progress' list. And once you've completed the task, you can move it to the 'Completed' section.
 
 
-📌 📌 📌 NOTE: The project is still in progress and not yet complete.
+📌 📌 📌 NOTE: The project is still in progress.
