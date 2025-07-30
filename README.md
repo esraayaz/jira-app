@@ -4,8 +4,11 @@
 
 🤍 You can move list items using drag and drop.
 
+
 ✅ In this project, the contenteditable, ondragover, ondragenter, and ondrop properties were used in the HTML file.
+
 ✅ All list items are created, edited, and deleted using JavaScript.
+
 ✅ The changes made are stored in LocalStorage.
 
 
