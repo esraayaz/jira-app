@@ -1,8 +1,12 @@
 const listColumns = document.querySelectorAll(".drag-item-list");
-
 const todoList = document.getElementById("todo-list");
 const progressList = document.getElementById("progress-list");
 const finishedList = document.getElementById("finished-list");
+
+const addButtons = document.querySelectorAll(".add-btn");
+const saveButtons = document.querySelectorAll(".save");
+const addItemContainers = document.querySelectorAll(".add-item");
+const addItems = document.querySelectorAll(".text-area");
 
 let todoListArray = [];
 let progressListArray = [];
@@ -11,14 +15,17 @@ let listArrays = [];
 
 let draggedItem;
 let currentColumn;
-
 let updatedOnLoad = false;
 
 function getSavedColumns() {
-  if (localStorage.getItem("todoItems")) {
-    todoListArray = JSON.parse(localStorage.getItem("todoItems"));
-    progressListArray = JSON.parse(localStorage.getItem("progressItems"));
-    finishedListArray = JSON.parse(localStorage.getItem("finishedItems"));
+  const savedTodo = localStorage.getItem("todoItems");
+  const savedProgress = localStorage.getItem("progressItems");
+  const savedFinished = localStorage.getItem("finishedItems");
+
+  if (savedTodo) {
+    todoListArray = JSON.parse(savedTodo);
+    progressListArray = JSON.parse(savedProgress);
+    finishedListArray = JSON.parse(savedFinished);
   } else {
     todoListArray = ["React integration", "Angular integration"];
     progressListArray = ["Counter application"];
@@ -56,18 +63,94 @@ function createItem(columnItem, column, item, index) {
     "transition-all",
     "text-slate-800"
   );
-  listItem.classList.add("drag-item");
+
+  if (column === 2) {
+    listItem.classList.add("line-through", "opacity-50");
+  }
+
   listItem.textContent = item;
   listItem.draggable = true;
   listItem.setAttribute("ondragstart", "drag(event)");
+
+  listItem.addEventListener("dblclick", function () {
+    editItem(listItem, column);
+  });
+
   columnItem.appendChild(listItem);
 }
 
+function editItem(item, column) {
+  const originalText = item.textContent;
+  const input = document.createElement("input");
+  input.type = "text";
+  input.value = originalText;
+  input.className =
+    "w-full bg-transparent border-none outline-none text-slate-800";
+
+  item.textContent = "";
+  item.appendChild(input);
+  input.focus();
+  input.select();
+
+  function saveEdit() {
+    const newText = input.value.trim();
+    if (newText) {
+      item.textContent = newText;
+      rebuildArrays();
+    } else {
+      item.textContent = originalText;
+    }
+  }
+
+  input.addEventListener("blur", saveEdit);
+  input.addEventListener("keydown", function (e) {
+    if (e.key === "Enter") {
+      input.blur();
+    } else if (e.key === "Escape") {
+      item.textContent = originalText;
+    }
+  });
+}
+
+function showItemDiv(column) {
+  addButtons[column].classList.add("hidden");
+  addItemContainers[column].classList.remove("hidden");
+  saveButtons[column].classList.remove("hidden");
+  addItems[column].focus();
+}
+
+// Add item div'ini gizle ve kaydet
+function hideItemDiv(column) {
+  const textValue = addItems[column].value.trim();
+
+  if (textValue) {
+    // Yeni item'ı ilgili diziye ekle
+    if (column === 0) {
+      todoListArray.push(textValue);
+    } else if (column === 1) {
+      progressListArray.push(textValue);
+    } else if (column === 2) {
+      finishedListArray.push(textValue);
+    }
+
+    // DOM'u güncelle
+    updateDOM();
+  }
+
+  // Form'u temizle ve gizle
+  addItems[column].value = "";
+  addItemContainers[column].classList.add("hidden");
+  saveButtons[column].classList.add("hidden");
+  addButtons[column].classList.remove("hidden");
+}
+
+// Drag & Drop fonksiyonları
 function allowDrop(e) {
   e.preventDefault();
 }
 
 function dragEnter(column) {
+  listColumns[column].classList.add("drag-over");
   currentColumn = column;
 }
 
@@ -75,11 +158,19 @@ function drop(e) {
   e.preventDefault();
   const parent = listColumns[currentColumn];
 
-  parent.appendChild(draggedItem);
+  listColumns.forEach((column) => {
+    column.classList.remove("drag-over");
+  });
 
+  parent.appendChild(draggedItem);
   rebuildArrays();
 }
 
+function drag(e) {
+  draggedItem = e.target;
+}
+
+// Dizileri yeniden oluştur
 function rebuildArrays() {
   todoListArray = [];
   progressListArray = [];
@@ -100,33 +191,43 @@ function rebuildArrays() {
   updateSavedColumns();
 }
 
-function drag(e) {
-  draggedItem = e.target;
-}
-
+// DOM'u güncelle
 function updateDOM() {
   if (!updatedOnLoad) {
     getSavedColumns();
   }
 
-  todoList.textContent = "";
+  // Listeleri temizle
+  todoList.innerHTML = "";
+  progressList.innerHTML = "";
+  finishedList.innerHTML = "";
+
+  // Yeni itemları oluştur
   todoListArray.forEach((todoItem, index) => {
     createItem(todoList, 0, todoItem, index);
   });
 
-  progressList.textContent = "";
   progressListArray.forEach((progressItem, index) => {
     createItem(progressList, 1, progressItem, index);
   });
 
-  finishedList.textContent = "";
   finishedListArray.forEach((finishedItem, index) => {
     createItem(finishedList, 2, finishedItem, index);
   });
 
   updatedOnLoad = true;
-
   updateSavedColumns();
 }
 
+// Enter tuşu ile kaydetme
+addItems.forEach((textarea, index) => {
+  textarea.addEventListener("keydown", function (e) {
+    if (e.key === "Enter" && !e.shiftKey) {
+      e.preventDefault();
+      hideItemDiv(index);
+    }
+  });
+});
+
+// Sayfa yüklendiğinde başlat
 updateDOM();
