@@ -117,7 +117,7 @@ function editItem(item, column) {
     if (e.key === "Enter") {
       input.blur();
     } else if (e.key === "Escape") {
-      // Escape ile iptal - eski metni geri yükle
+      // Cancel with Escape - restore old text
       item.textContent = originalText;
     }
   });
@@ -231,7 +231,7 @@ function updateDOM() {
   updateSavedColumns();
 }
 
-// Enter tuşu ile kaydetme
+// Save with the Enter key
 addItems.forEach((textarea, index) => {
   textarea.addEventListener("keydown", function (e) {
     if (e.key === "Enter" && !e.shiftKey) {
